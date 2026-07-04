@@ -72,11 +72,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     )
 
 
-model = joblib.load("models/model.joblib")
-preprocessor = joblib.load("models/preprocessor.joblib")
-metadata = joblib.load("models/metadata.joblib")
-features = metadata["features"]
-threshold = metadata["threshold"]
+
 
 
 @app.post("/predict_churn", response_model=ChurnResponse)
