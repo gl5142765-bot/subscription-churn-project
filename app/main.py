@@ -3,17 +3,23 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
 import pandas as pd
-
 from pathlib import Path
 import joblib
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-MODEL_PATH = BASE_DIR / "models" / "model.joblib"
+MODEL_FILE = BASE_DIR / "models" / "model.joblib"
+PREPROCESSOR_FILE = BASE_DIR / "models" / "preprocessor.joblib"
+METADATA_FILE = BASE_DIR / "models" / "metadata.joblib"
 
-model = joblib.load(MODEL_PATH)
+model = joblib.load(MODEL_FILE)
+preprocessor = joblib.load(PREPROCESSOR_FILE)
+metadata = joblib.load(METADATA_FILE)
+
+features = metadata["features"]
+threshold = metadata["threshold"]
+
+
 app = FastAPI()
-
-
 
 class ChurnRequest(BaseModel):
     AccountAge: int = Field(..., ge=0)
