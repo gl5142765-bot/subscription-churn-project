@@ -6,6 +6,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 MODEL_PATH = BASE_DIR / "models" / "churn_model.pkl"
 
+API_BASE_URL = "https://subscription-churn-project.onrender.com"
+PREDICT_URL = f"{API_BASE_URL}/predict_churn"
 
 st.set_page_config(
     page_title="Streaming membership churn dashboard",
@@ -86,7 +88,7 @@ if predict_clicked:
     }
 
     try:
-        response = requests.post("http://127.0.0.1:8000/predict_churn", json=payload)
+        response = requests.post(PREDICT_URL, json=payload, timeout=30)
 
         if response.status_code == 200:
             result = response.json()
@@ -134,10 +136,19 @@ if predict_clicked:
         else:
             st.error("Prediction failed.")
             with st.expander("Show error details", icon=":material/error:"):
-                st.json(response.json())
+                try:
+                    st.json(response.json())
+                except Exception:
+                    st.write(response.text)
 
     except requests.exceptions.ConnectionError:
         st.error(
-            "Could not connect to FastAPI server. Make sure the backend is running on http://127.0.0.1:8000",
+            f"Could not connect to FastAPI server. Make sure the backend is running on {API_BASE_URL}",
             icon=":material/cloud_off:"
+        )
+
+    except requests.exceptions.Timeout:
+        st.error(
+            "The request timed out. Render free instances can take time to wake up. Please try again.",
+            icon=":material/schedule:"
         )
