@@ -1,0 +1,48 @@
+import pandas as pd
+df = pd.read_csv("data/raw/churn.csv")
+df.head() 
+df.info() 
+df.describe(include='all') 
+df['Churn'].value_counts(normalize=True)
+
+
+# Day 3 – Initial EDA
+
+## Numeric columns
+- AccountAge
+- MonthlyCharges
+- TotalCharges
+- ViewingHoursPerWeek
+- AverageViewingDuration
+- ContentDownloadsPerMonth
+- UserRating
+- SupportTicketsPerMonth
+- WatchlistSize
+- Churn
+
+## Categorical columns
+- SubscriptionType
+- PaymentMethod
+- PaperlessBilling
+- ContentType
+- MultiDeviceAccess
+- DeviceRegistered
+- GenrePreference
+- Gender
+- ParentalControl
+- SubtitlesEnabled
+
+## Identifier column
+- CustomerID
+
+## Suspicious / important notes
+- Some columns contain missing values, such as MonthlyCharges, PaymentMethod, GenrePreference, UserRating, DeviceRegistered, and SubtitlesEnabled.
+- CustomerID should not be used as a predictive feature.
+- Churn is the target column.
+
+## Class balance
+- Non-churn (0): 0.78
+- Churn (1): 0.22
+
+This means the dataset is somewhat imbalanced, but not extremely.
+

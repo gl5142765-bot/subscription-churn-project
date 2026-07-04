@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+pandas
+numpy
+scikit-learn
+streamlit
+requests
+joblib
+pydantic
+pytest

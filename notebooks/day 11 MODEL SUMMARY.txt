@@ -1,0 +1,34 @@
+Day 11 – Model Summary
+
+Algorithm chosen: Logistic Regression with class balancing, tuned for churn detection.
+
+Final hyperparameters: `C = 0.01`, `solver = liblinear`.
+
+Fine-tuned metrics:
+- Accuracy: 0.39378238341968913
+- Precision: 0.21768707482993196
+- Recall: 0.9411764705882353
+- F1 Score: 0.35359116022099446
+- Confusion Matrix: `[[44, 115], [2, 32]]`
+
+Feature removal decision:
+The following three features were removed from the final model:
+- UserRating
+- SupportTicketsPerMonth
+- TotalCharges
+
+Reason for removal:
+These features showed weak or mixed contributions during feature testing, and removing them simplified the model without compromising the main goal of identifying churners.
+
+Top important features and intuition:
+- AccountAge: Short-tenure customers are more likely to churn.
+- MonthlyCharges: Higher monthly cost can increase churn risk.
+- ViewingHoursPerWeek: Lower usage often signals weaker engagement.
+- ContentDownloadsPerMonth: Low download activity may indicate low interest.
+- SubscriptionType: Basic plans may be more churn-prone than premium plans.
+- ContentType: Content preference can reflect user engagement.
+- DeviceRegistered: Device usage may affect customer behavior.
+- GenrePreference: Strong preferences can indicate more stable engagement.
+
+Final decision:
+This is the model I will deploy.

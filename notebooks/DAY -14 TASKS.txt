@@ -1,0 +1,58 @@
+day -14 task 1
+
+Task 1: Test the API
+        │
+        ├── 1. Start FastAPI server
+        │       └── Run uvicorn and confirm local URL is active
+        │
+        ├── 2. Identify the correct endpoint
+        │       └── Checked Swagger/docs and found POST /predict_churn
+        │
+        ├── 3. Manual API test from terminal
+        │       └── Sent POST request with JSON body from PowerShell
+        │
+        ├── 4. Verify API response
+        │       └── Confirmed JSON output: probability, threshold, label, message
+        │
+        ├── 5. Create separate testing structure
+        │       └── Created tests/test_client.py
+        │
+        ├── 6. Run Python client script
+        │       └── Used python .\test_client.py from tests folder
+        │
+        └── 7. Confirm Task 1 complete
+                └── API works from terminal and external Python client
+
+
+Task 2 + Task 3 Workflow
+
+Client sends request
+        ↓
+FastAPI receives JSON body
+        ↓
+Pydantic validates request fields
+        ↓
+┌───────────────────────────────┐
+│ If request is invalid         │
+│ → Return custom 422 error     │
+│ → Stop processing             │
+└───────────────────────────────┘
+        ↓ valid request
+Endpoint runs prediction logic
+        ↓
+Preprocess input data
+        ↓
+Model generates churn probability
+        ↓
+Compare probability with threshold
+        ↓
+Assign label (0 or 1)
+        ↓
+Map probability to risk_band
+(low / medium / high)
+        ↓
+Build response object
+        ↓
+FastAPI validates response_model
+        ↓
+Return final JSON to client

@@ -1,0 +1,26 @@
+Day 15 Flowchart
+
+Create Streamlit UI
+        ↓
+Add customer input fields
+        ↓
+Click the "Predict Churn" button
+        ↓
+Send input data to FastAPI /predict_churn
+        ↓
+Receive prediction response
+        ↓
+Display churn probability (decimal + percentage)
+        ↓
+Display the risk label in a side-by-side metric column
+        ↓
+Show recommendation message based on risk
+        ↓
+Hide raw JSON inside debug expander
+        ↓
+Get clean first-version churn dashboard
+
+
+
+flow of streamlit
+User input → Streamlit UI → FastAPI prediction → (probability,risk_band and message) → dashboard output
